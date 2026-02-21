@@ -1,3 +1,11 @@
+# Custom hidden files
+.env
+uv.lock
+.python-version
+folder_structure
+.venv
+pyproject.toml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

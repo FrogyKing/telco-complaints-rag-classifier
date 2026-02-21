@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+python-dotenv
+pinecone-client
+langchain-pinecone
+langchain-google-genai
+langchain_core
+langchain_google_vertexai

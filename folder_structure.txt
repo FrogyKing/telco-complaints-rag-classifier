@@ -1,0 +1,23 @@
+telco-complaints-rag-classifier/
+├── src/
+│   ├── __init__.py
+│   ├── main.py              # Punto de entrada (FastAPI)
+│   ├── config.py            # Manejo de variables de entorno (GCP, Pinecone, Langfuse)
+│   ├── services/            # Lógica de negocio e integración
+│   │   ├── __init__.py
+│   │   ├── ai_service.py    # Lógica de Gemini (Vertex AI) y clasificación
+│   │   ├── vector_store.py  # Conexión y búsqueda en Pinecone (Retriever)
+│   │   └── observability.py # Configuración de Langfuse
+│   └── models/              # Esquemas de datos (Pydantic)
+│       └── complaint.py     # Definición de entrada (reclamo) y salida (categoría)
+├── scripts/
+│   └── ingest_data.py       # Script para subir tus ejemplos históricos a Pinecone
+├── notebooks/
+│   └── exploration.ipynb    # Opcional: Para mostrar pruebas previas en clase
+├── tests/                   # Pruebas mínimas para demostrar calidad
+│   └── test_api.py
+├── .env.example             # Plantilla de tus llaves (PINECONE_API_KEY, etc.)
+├── .gitignore
+├── Dockerfile               # Configuración para desplegar en Cloud Run
+├── requirements.txt         # Librerías necesarias
+└── README.md                # Documentación del proyecto y diagrama de arquitectura
