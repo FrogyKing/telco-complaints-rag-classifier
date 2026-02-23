@@ -33,3 +33,14 @@ async def classify_stream(item: Item):
         service.classify_stream(item.text),
         media_type="text/plain"
     )
+
+@app.get("/history")
+async def history():
+    docs = service.db.collection("clasificaciones")\
+        .order_by("timestamp", direction="DESCENDING")\
+        .limit(20)\
+        .stream()
+    return JSONResponse(content=[
+        {**doc.to_dict(), "timestamp": doc.to_dict()["timestamp"].isoformat()}
+        for doc in docs
+    ])

@@ -6,6 +6,8 @@ from langchain_google_vertexai import VertexAIEmbeddings, ChatVertexAI
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.prompts import ChatPromptTemplate
 from langfuse.langchain import CallbackHandler
+from datetime import datetime
+from google.cloud import firestore
 
 
 class ComplaintClassifier:
@@ -25,6 +27,7 @@ class ComplaintClassifier:
             embedding=self.embeddings
         )
         self.langfuse_handler = CallbackHandler()
+        self.db = firestore.Client(project="luis-sandbox-488104")
         self.categorias_validas = self._get_categorias()
 
     def _get_categorias(self) -> list[str]:
@@ -77,6 +80,15 @@ class ComplaintClassifier:
             {"reclamo": d.page_content, "categoria": d.metadata["categoria"]}
             for d in docs
         ]
+
+        self.db.collection("clasificaciones").add({
+            "reclamo": text,
+            "categoria": result["categoria"],
+            "confianza": result["confianza"],
+            "razonamiento": result["razonamiento"],
+            "timestamp": datetime.utcnow()
+        })
+
         return result
 
     def classify_stream(self, text: str) -> Iterator[str]:

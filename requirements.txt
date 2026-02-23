@@ -1,9 +1,11 @@
 fastapi
 uvicorn
-pandas
+pydantic
 python-dotenv
-pinecone-client
+langchain
+langchain-google-vertexai
 langchain-pinecone
-langchain-google-genai
-langchain_core
-langchain_google_vertexai
+langchain-core
+langfuse
+pinecone
+google-cloud-firestore
